@@ -1,6 +1,8 @@
 #BUG: `wins += bool(game['players'][party[0]]['win'])`
 # this is bungus code, but not sure how to fix yet
 # want this to add one if the party won the game, and zero ow
+def did_player_win(game,player):
+    
 def party_win_rate(games, party):
     def is_party_in_game(game, party):
         game_players =[]
@@ -27,19 +29,11 @@ def party_win_rate(games, party):
             wins += bool(game['players'][party[0]]['win'])
     return wins / total_games
 
-    def get_aspect(games, aspect, match_id = False):
-    """ Returns a list containing aspect for each game """
-    aspects = []
-    if match_ids == True:
-        for game in games:
-            try:
-                aspects.append((game['match_id'], game[str(aspect)]))
-            except:
-                aspects.append(None)
-    else:
-      for game in games:
-          try:
-              aspects.append(game[str(aspect)])
-          except:
-              aspects.append(None)
-    return aspects
+def get_key_value(dicts, key):
+""" Returns a list containing values corresponding to `key`
+    for each dictionary in `dicts`
+"""
+key_values = []
+for dictionary in dicts:
+    key_values.append(dictionary.get(key))
+return key_values
