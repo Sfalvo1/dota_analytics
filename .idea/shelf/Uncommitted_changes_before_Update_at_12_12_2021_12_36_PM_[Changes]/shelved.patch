@@ -1,0 +1,120 @@
+Index: analysis_functions.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#BUG: `wins += bool(game['players'][party[0]]['win'])`\r\n# this is bungus code, but not sure how to fix yet\r\n# want this to add one if the party won the game, and zero ow\r\ndef party_win_rate(games, party):\r\n    def is_party_in_game(game, party):\r\n        game_players =[]\r\n        for player in game['players']:\r\n            try:\r\n                game_players.append(str(player['account_id']))\r\n            except:\r\n                pass\r\n        in_game = True\r\n        for party_player in party:\r\n            temp_bool = (party_player in game_players)\r\n            in_game =  in_game & temp_bool\r\n        return in_game\r\n    total_games = 0\r\n    wins = 0\r\n    for game in games:\r\n        if is_party_in_game(game, party):\r\n            total_games += 1\r\n            i = 0\r\n            # got stuck here\r\n            # its hard to access specific information for a particular\r\n            # player, need to write some func or restructure data...\r\n            # Why surround this in a bool cast?\r\n            wins += bool(game['players'][party[0]]['win'])\r\n    return wins / total_games\r\n\r\n    def get_aspect(games, aspect, match_id = False):\r\n    \"\"\" Returns a list containing aspect for each game \"\"\"\r\n    aspects = []\r\n    if match_ids == True:\r\n        for game in games:\r\n            try:\r\n                aspects.append((game['match_id'], game[str(aspect)]))\r\n            except:\r\n                aspects.append(None)\r\n    else:\r\n      for game in games:\r\n          try:\r\n              aspects.append(game[str(aspect)])\r\n          except:\r\n              aspects.append(None)\r\n    return aspects
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/analysis_functions.py b/analysis_functions.py
+--- a/analysis_functions.py	(revision 3383c6db67105c249ce18e9940a18d33d4925a7f)
++++ b/analysis_functions.py	(date 1639330486794)
+@@ -1,6 +1,9 @@
++
++
+ #BUG: `wins += bool(game['players'][party[0]]['win'])`
+ # this is bungus code, but not sure how to fix yet
+ # want this to add one if the party won the game, and zero ow
++
+ def party_win_rate(games, party):
+     def is_party_in_game(game, party):
+         game_players =[]
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1639330392646)
++++ b/.idea/.gitignore	(date 1639330392646)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
+Index: .idea/dota_analytics.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dota_analytics.iml b/.idea/dota_analytics.iml
+new file mode 100644
+--- /dev/null	(date 1639330392653)
++++ b/.idea/dota_analytics.iml	(date 1639330392653)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1639330392657)
++++ b/.idea/modules.xml	(date 1639330392657)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/dota_analytics.iml" filepath="$PROJECT_DIR$/.idea/dota_analytics.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1639330392662)
++++ b/.idea/misc.xml	(date 1639330392662)
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.8" project-jdk-type="Python SDK" />
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/profiles_settings.xml b/.idea/inspectionProfiles/profiles_settings.xml
+new file mode 100644
+--- /dev/null	(date 1639330392667)
++++ b/.idea/inspectionProfiles/profiles_settings.xml	(date 1639330392667)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1639330392671)
++++ b/.idea/vcs.xml	(date 1639330392671)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
